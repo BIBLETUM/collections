@@ -61,4 +61,31 @@ public class CarListTest {
         //assertEquals(new Car("Brand 0", 0), car);
     }
 
+    @Test
+    public void whenAddedByIndexIntoMiddleThenMustBeIncreased(){
+        Car car = new Car("Kia", 54);
+        carList.add(car, 67);
+        assertEquals(101, carList.size());
+        Car newCar = carList.get(67);
+        assertEquals(car.getBrand(), newCar.getBrand());
+    }
+
+    @Test
+    public void whenAddedByIndexIntoStartThenMustBeIncreased(){
+        Car car = new Car("Kia", 54);
+        carList.add(car, 0);
+        assertEquals(101, carList.size());
+        Car newCar = carList.get(0);
+        assertEquals(car.getBrand(), newCar.getBrand());
+    }
+
+    @Test
+    public void whenAddedByIndexIntoEndThenMustBeIncreased(){
+        Car car = new Car("Kia", 54);
+        carList.add(car, 100);
+        assertEquals(101, carList.size());
+        Car newCar = carList.get(100);
+        assertEquals(car.getBrand(), newCar.getBrand());
+    }
+
 }
