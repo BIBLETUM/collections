@@ -14,7 +14,7 @@ public class CarArrayList implements CarList {
 
     @Override
     public void add(Car car) {
-        checkArraySize(); //Рога и копыта
+        checkArraySize();
         array[size] = car;
         size++;
     }
