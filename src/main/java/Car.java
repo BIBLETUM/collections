@@ -1,6 +1,9 @@
+import java.util.ArrayList;
+
 public class Car {
     private String brand;
     private int number;
+    ArrayList arr = new ArrayList();
 
     public Car(String brand, int number) {
         this.brand = brand;
