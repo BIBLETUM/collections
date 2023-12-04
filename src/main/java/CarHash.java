@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.util.Iterator;
 
 public class CarHash implements CarSet {
 
@@ -29,15 +30,45 @@ public class CarHash implements CarSet {
             while (true) {
                 if (element.val.equals(car)) {
                     return false;
-                } else if (element.next != null){
+                } else if (element.next != null) {
                     element = element.next;
-                }
-                else{
+                } else {
                     element.next = new Entry(car, null);
                     return true;
                 }
             }
         }
+    }
+
+
+    @Override
+    public Iterator<Car> iterator() {
+        return new Iterator<Car>() {
+            private int index = 0;
+            private int arrayIndex = 0;
+            private Entry entry;
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public Car next() {
+                while(array[arrayIndex] == null){
+                    arrayIndex++;
+                }
+                if (entry == null){
+                    entry = array[index];
+                }
+                Car car = entry.val;
+                entry = entry.next;
+                if(entry == null){
+                    arrayIndex++;
+                }
+                index++;
+                return car;
+            }
+        };
     }
 
     private void increaseArray() {
@@ -51,6 +82,20 @@ public class CarHash implements CarSet {
             }
         }
         array = newArray;
+    }
+
+    @Override
+    public boolean contains(Car car) {
+        for (Entry entry : array) {
+            while (entry != null) {
+                if (entry.val.equals(car)){
+                    return true;
+                }else {
+                    entry = entry.next;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

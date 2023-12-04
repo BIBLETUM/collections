@@ -1,4 +1,3 @@
-import com.sun.source.tree.AssertTree;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -86,6 +85,14 @@ public class CarListTest {
         assertEquals(101, carList.size());
         Car newCar = carList.get(100);
         assertEquals(car.getBrand(), newCar.getBrand());
+    }
+
+    @Test
+    public void checkCarExistence(){
+        Car car = new Car("Brand 0", 0);
+        Car carFalse = new Car("aboba", 2131);
+        assertTrue(carList.contains(car));
+        assertFalse(carList.contains(carFalse));
     }
 
 }

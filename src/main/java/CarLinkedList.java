@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class CarLinkedList implements CarList {
     private Node last;
     private Node first;
@@ -22,7 +24,37 @@ public class CarLinkedList implements CarList {
     }
 
     @Override
-    public void add(Car car) {
+    public Iterator<Car> iterator() {
+        return new Iterator<Car>() {
+            private Node node = first;
+            @Override
+            public boolean hasNext() {
+                return node != null;
+            }
+
+            @Override
+            public Car next() {
+                Car car = node.value;
+                node = node.next;
+                return car;
+            }
+        };
+    }
+
+    @Override
+    public boolean contains(Car car) {
+        Node node = first;
+        for (int i = 0; i < size; i++) {
+            if(node.value.equals(car)){
+                return true;
+            }
+            node = node.next;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean add(Car car) {
         if (size == 0) {
             Node newNode = new Node(null, null, car);
             first = newNode;
@@ -33,16 +65,16 @@ public class CarLinkedList implements CarList {
             oldNode.next = last;
         }
         size++;
+        return true;
     }
 
     @Override
-    public void add(Car car, int index) {
+    public boolean add(Car car, int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
         if (index == size) {
-            add(car);
-            return;
+            return add(car);
         } else {
             Node oldNode = getNodeByIndex(index);
             Node oldNodePrev = oldNode.previous;
@@ -55,6 +87,7 @@ public class CarLinkedList implements CarList {
             }
             oldNode.previous = newNode;
             size++;
+            return true;
         }
     }
 
