@@ -76,7 +76,6 @@ public class CarHash implements CarSet {
         for (Entry entry : array) {
             Entry element = entry;
             while (element != null) {
-                int newPosition = getElementPosition(element.val, newArray.length);
                 add(element.val, newArray);
                 element = element.next;
             }
