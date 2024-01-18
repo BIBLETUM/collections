@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class CarCollectionTest {
-    private CarCollection carCollection;
+    private CarCollection<Car> carCollection;
 
     @Before
     public void setUp() throws Exception {

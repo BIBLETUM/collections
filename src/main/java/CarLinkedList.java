@@ -1,16 +1,16 @@
 import java.util.Iterator;
 
-public class CarLinkedList implements CarList {
+public class CarLinkedList<T> implements CarList<T> {
     private Node last;
     private Node first;
     private int size = 0;
 
-    private static class Node {
+    private class Node {
         private Node previous;
         private Node next;
-        private Car value;
+        private T value;
 
-        private Node(Node previous, Node next, Car value) {
+        private Node(Node previous, Node next, T value) {
             this.previous = previous;
             this.next = next;
             this.value = value;
@@ -18,14 +18,14 @@ public class CarLinkedList implements CarList {
     }
 
     @Override
-    public Car get(int index) {
+    public T get(int index) {
         checkIndex(index);
         return getNodeByIndex(index).value;
     }
 
     @Override
-    public Iterator<Car> iterator() {
-        return new Iterator<Car>() {
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
             private Node node = first;
             @Override
             public boolean hasNext() {
@@ -33,8 +33,8 @@ public class CarLinkedList implements CarList {
             }
 
             @Override
-            public Car next() {
-                Car car = node.value;
+            public T next() {
+                T car = node.value;
                 node = node.next;
                 return car;
             }
@@ -42,7 +42,7 @@ public class CarLinkedList implements CarList {
     }
 
     @Override
-    public boolean contains(Car car) {
+    public boolean contains(T car) {
         Node node = first;
         for (int i = 0; i < size; i++) {
             if(node.value.equals(car)){
@@ -54,7 +54,7 @@ public class CarLinkedList implements CarList {
     }
 
     @Override
-    public boolean add(Car car) {
+    public boolean add(T car) {
         if (size == 0) {
             Node newNode = new Node(null, null, car);
             first = newNode;
@@ -69,7 +69,7 @@ public class CarLinkedList implements CarList {
     }
 
     @Override
-    public boolean add(Car car, int index) {
+    public boolean add(T car, int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
@@ -92,7 +92,7 @@ public class CarLinkedList implements CarList {
     }
 
     @Override
-    public boolean remove(Car car) {
+    public boolean remove(T car) {
         Node node = first;
         for (int i = 0; i < size; i++) {
             if(node.value.equals(car)){

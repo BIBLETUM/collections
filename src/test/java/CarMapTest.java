@@ -7,11 +7,11 @@ import java.util.Set;
 import static org.junit.Assert.*;
 
 public class CarMapTest {
-    private CarMap carMap;
+    private CarMap<CarOwner, Car> carMap;
 
     @Before
     public void setUp() throws Exception {
-        carMap = new CarHashMap();
+       carMap = new CarHashMap<>();
         for (int i = 0; i < 100; i++) {
             CarOwner carOwner = new CarOwner(i, "Name" + i, "Last Name" + i);
             Car car = new Car("Brand " + i, i);

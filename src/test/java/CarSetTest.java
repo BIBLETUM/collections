@@ -5,11 +5,11 @@ import static org.junit.Assert.*;
 
 public class CarSetTest {
 
-    private CarSet carSet;
+    private CarSet<Car> carSet;
 
     @Before
     public void setUp(){
-        carSet = new CarHash();
+        carSet = new CarHash<>();
         for (int i = 0; i < 100; i++) {
             carSet.add(new Car("Brand " + i, i));
         }
